@@ -1,8 +1,8 @@
 package pl.michalstawarz.portfolio.androidportfolio;
 
 import android.content.Context;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,29 +30,33 @@ public class MainActivity extends ActionBarActivity {
     public void sendMessage(View view) {
         Context context = getApplicationContext();
 
-        StringBuilder toastNotification = new StringBuilder("This button will launch my ");
+        StringBuilder toastNotification = new StringBuilder(getString(R.string.app_button_will_launch));
         int duration = Toast.LENGTH_SHORT;
 
         if (view.getId() == R.id.btn_spotify) {
-            toastNotification.append("spotify app!");
+            toastNotification.append(getString(R.string.app_spotify));
         }
         else if (view.getId() == R.id.btn_build_bigger) {
-            toastNotification.append("build it bigger app!");
+            toastNotification.append(getString(R.string.app_bib));
         }
         else if (view.getId() == R.id.btn_capstone) {
-            toastNotification.append("own app!");
+            toastNotification.append(getString(R.string.app_own));
         }
         else if (view.getId() == R.id.btn_library) {
-            toastNotification.append("library app!");
+            toastNotification.append(getString(R.string.app_library));
         }
         else if (view.getId() == R.id.btn_reader) {
-            toastNotification.append("xyz reader app");
+            toastNotification.append(getString(R.string.app_xyz));
         }
         else if (view.getId()== R.id.btn_scores) {
-            toastNotification.append("scores app");
+            toastNotification.append(getString(R.string.app_scores));
         }
 
-        Toast toast = Toast.makeText(context, toastNotification, duration);
+        if (toast != null) {
+            toast.cancel();
+        }
+
+        toast = Toast.makeText(context, toastNotification, duration);
         toast.show();
     }
 
@@ -60,11 +66,6 @@ public class MainActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
